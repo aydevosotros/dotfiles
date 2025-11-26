@@ -147,17 +147,24 @@ gcommit() {
 ⏪ revert:   Reverting changes"
 
     # 2. Select with fzf (with preview window)
-    local selected=$(echo "$emojis" | fzf --height 40% --layout=reverse --border --prompt="Select commit type: ")
+    local selected
+    selected=$(echo "$emojis" | fzf --height 40% --layout=reverse --border --prompt="Select commit type: ")
 
     # Exit if cancelled
-    if [ -z "$selected" ]; then return 0; fi
+    if [ -z "$selected" ]; then
+        return 0
+    fi
 
     # 3. Extract icon and type (e.g., "✨ feat:")
-    local prefix=$(echo "$selected" | awk '{print $1, $2}')
+    local prefix
+    prefix=$(echo "$selected" | awk '{print $1, $2}')
 
     # 4. Prompt for message
     echo -e "\nSelected type: \033[1;32m$prefix\033[0m"
-    read -p "Commit message: " msg
+
+    # zsh-friendly read (no -p here)
+    local msg
+    read "msg?Commit message: "
 
     # 5. Commit
     if [ -n "$msg" ]; then
@@ -168,7 +175,8 @@ gcommit() {
 }
 # --- END GITMOJI ---
 
-# --- JIRA SMART BRANCHING (ZSH VERSION) ---
+
+# --- JIRA SMART BRANCHING ---
 qbranch() {
     # 1. Update current branch
     echo -e "\n\033[1;33m🔄 Pulling latest changes for current branch...\033[0m"

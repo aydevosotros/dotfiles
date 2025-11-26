@@ -16,6 +16,8 @@ My personal Linux/macOS configuration: **Zsh**, **Oh‑My‑Zsh**, terminal twea
 Everything clean, modular, and easy to install.
 
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+![CI](https://github.com/tuusuario/dotfiles/actions/workflows/ci.yml/badge.svg)
+![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)
 ![Platform](https://img.shields.io/badge/Linux-macOS-blue)
 ![Zsh](https://img.shields.io/badge/Shell-Zsh-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
