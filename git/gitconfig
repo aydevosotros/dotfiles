@@ -1,0 +1,75 @@
+[user]
+    name = Antonio Molina
+    email = antonio.molina@qustodio.com
+
+[color]
+    ui = auto
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+
+[core]
+    editor = vim
+    autocrlf = input
+    pager = diff-so-fancy | less --tabs=4 -RFX
+    excludesfile = ~/.gitignore_global
+
+[alias]
+    # Status and logs
+    s = status -sb
+    lg = log --oneline --graph --decorate
+    ll = log --stat --abbrev-commit
+
+    # Diffing
+    d = diff
+    ds = diff --staged
+
+    # Add / Commit / Push flow
+    aa = add -A
+    cm = commit -m
+    amend = commit --amend --no-edit
+
+    # Branching
+    b = branch
+    co = checkout
+    nb = checkout -b
+    bd = branch -d
+    bdd = branch -D
+
+    # Pull / Push
+    pu = push
+    pl = pull --rebase
+
+    # Stash
+    st = stash
+    stp = stash pop
+    stl = stash list
+
+    # Cleanup
+    cleanall = "!git reset --hard && git clean -fd"
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    tool = meld
+    mnemonicprefix = true
+    colorMoved = default
+
+[log]
+    abbrevCommit = true
+    showSignature = false
+
+[push]
+    default = current
+
+[fetch]
+    prune = true
+
+[pull]
+    rebase = true
+
+[credential]
+    helper = store
+

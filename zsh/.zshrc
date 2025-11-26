@@ -1,0 +1,238 @@
+# ==============================
+# Oh My Zsh core configuration
+# ==============================
+
+export ZSH="$HOME/.oh-my-zsh"
+
+# Prompt theme (try "agnoster" for a more modern look)
+ZSH_THEME="agnoster"
+# If you later install powerlevel10k, use:
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Enable nicer completion behavior (optional toggles)
+# CASE_SENSITIVE="true"          # Exact-case completion
+# HYPHEN_INSENSITIVE="true"      # Treat - and _ as the same
+ENABLE_CORRECTION="true"       # Suggest corrections for mistyped commands
+COMPLETION_WAITING_DOTS="true"   # Show dots while waiting for completion
+
+# History settings
+HISTSIZE=5000
+SAVEHIST=5000
+HISTFILE="$HOME/.zsh_history"
+setopt HIST_IGNORE_DUPS      # Do not record duplicate commands
+setopt HIST_IGNORE_ALL_DUPS  # Remove older duplicate entries
+setopt HIST_REDUCE_BLANKS    # Remove superfluous blanks
+setopt SHARE_HISTORY         # Share history across multiple zsh sessions
+
+# Enable variable expansion in prompts and show EOL marker
+setopt PROMPT_SUBST
+export PROMPT_EOL_MARK="↵"
+
+# ==============================
+# Oh My Zsh plugins
+# ==============================
+
+plugins=(
+  alias-finder
+  zsh-autosuggestions
+  git
+  kubectl
+  aws
+  docker
+  docker-compose
+  helm
+  history-substring-search
+  timer
+)
+
+source "$ZSH/oh-my-zsh.sh"
+
+# ==============================
+# Timer config
+# ==============================
+# Show command time only if it takes at least 1 second
+export TIMER_THRESHOLD=1
+
+# Number of decimal places (e.g. 1.234s)
+export TIMER_PRECISION=3
+
+# Nerdy time format, example: "⏱ Δt=1.234s"
+export TIMER_FORMAT=' ⏱ Δt=%ds'
+
+# ==============================
+# Extra plugins (outside Oh My Zsh)
+# ==============================
+
+# zsh-autosuggestions: ghost text suggestions from history
+if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+  # Optional: make suggestions a bit dimmer
+  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+fi
+
+# zsh-syntax-highlighting: command syntax colors
+# Must be loaded at the end so it does not break other widgets
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# ==============================
+# Bash completion compatibility (for tools like mcli)
+# ==============================
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/mcli mcli
+
+# ==============================
+# Right Prompt Config
+# ==============================
+
+# Función auxiliar para pintar el entorno virtual sin romper las llaves
+function virtualenv_info {
+  [ $VIRTUAL_ENV ] && echo " %F{magenta}🐍 ${VIRTUAL_ENV:t}%f"
+}
+
+# Right prompt:
+#  - ⚡ when running as root
+#  - 💥 <code> when last command failed
+#  - 🐍 <env> when inside a Python virtualenv (usando la función)
+RPROMPT='%(#.%F{yellow}⚡ root%f.)%(?..%F{red} 💥 %?%f)$(virtualenv_info)'
+
+# ==============================
+# Custom functions
+# ==============================
+
+# Proton runner with a persistent prefix per game
+proton-run() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: proton-run <path-to-exe> [args...]"
+    echo "Example: proton-run ./Game.exe"
+    return 1
+  fi
+
+  local exe="$1"
+  shift
+
+  # Use filename (without extension) as prefix name
+  local game_name
+  game_name="$(basename "${exe%.*}")"
+  local prefix_dir="$HOME/.proton-prefixes/$game_name"
+
+  mkdir -p "$prefix_dir"
+
+  echo "▶ Launching $exe with prefix: $prefix_dir"
+
+  # Tell protontricks to use that prefix (AppID is ignored, just needs a number)
+  STEAM_COMPAT_DATA_PATH="$prefix_dir" \
+  protontricks -c "\"$exe\" $*" 0
+}
+
+# GITMOJI CLI replacement
+gcommit() {
+    # 1. Standard Gitmoji list in English
+    local emojis="✨ feat:     Introducing new features
+🐛 fix:      Fixing a bug
+📝 docs:     Writing documentation
+🎨 style:    Improving structure/format of the code
+♻️  refactor: Refactoring code (not a fix or a feat)
+⚡ perf:     Improving performance
+🔥 remove:   Removing code or files
+🚑 hotfix:   Critical hotfix
+✅ test:     Adding or updating tests
+🔒 security: Fixing security issues
+🚀 deploy:   Deploying stuff
+📦 build:    Build system or dependencies
+👷 ci:       CI configuration
+🔧 chore:    Miscellaneous chores
+⏪ revert:   Reverting changes"
+
+    # 2. Select with fzf (with preview window)
+    local selected=$(echo "$emojis" | fzf --height 40% --layout=reverse --border --prompt="Select commit type: ")
+
+    # Exit if cancelled
+    if [ -z "$selected" ]; then return 0; fi
+
+    # 3. Extract icon and type (e.g., "✨ feat:")
+    local prefix=$(echo "$selected" | awk '{print $1, $2}')
+
+    # 4. Prompt for message
+    echo -e "\nSelected type: \033[1;32m$prefix\033[0m"
+    read -p "Commit message: " msg
+
+    # 5. Commit
+    if [ -n "$msg" ]; then
+        git commit -m "$prefix $msg"
+    else
+        echo "Commit cancelled (empty message)."
+    fi
+}
+# --- END GITMOJI ---
+
+# --- JIRA SMART BRANCHING (ZSH VERSION) ---
+qbranch() {
+    # 1. Update current branch
+    echo -e "\n\033[1;33m🔄 Pulling latest changes for current branch...\033[0m"
+    git pull
+    if [ $? -ne 0 ]; then
+        echo -e "\033[1;31m❌ Error pulling changes. Fix conflicts first.\033[0m"
+        return 1
+    fi
+
+    # 2. Define standard prefixes
+    local types="feature
+bugfix
+hotfix
+release
+chore
+test"
+
+    # 3. Select type with fzf
+    local type=$(echo "$types" | fzf --height 20% --layout=reverse --border --prompt="Select branch type: ")
+    if [ -z "$type" ]; then return 0; fi
+
+    # 4. Ask for Ticket ID (Fix for Zsh: using echo instead of read -p)
+    echo -n "🎫 Ticket ID (e.g. PROJ-101): "
+    read ticket_id
+    if [ -z "$ticket_id" ]; then echo "❌ Ticket ID required."; return 1; fi
+
+    # 5. Ask for Description (Fix for Zsh)
+    echo -n "📝 Short description: "
+    read description
+    if [ -z "$description" ]; then echo "❌ Description required."; return 1; fi
+
+    # 6. Slugify the description (Zsh friendly logic)
+    # Convert to lowercase
+    local clean_desc="${description:l}" 
+    # Replace spaces with hyphens
+    clean_desc="${clean_desc// /-}"
+    # Remove special characters (keep a-z, 0-9, -)
+    clean_desc=$(echo "$clean_desc" | sed -e 's/[^a-z0-9-]//g')
+
+    # 7. Construct final branch name
+    local branch_name="${type}/${ticket_id}-${clean_desc}"
+
+    # 8. Create and switch locally
+    echo -e "\n🚀 Creating branch: \033[1;32m$branch_name\033[0m"
+    git checkout -b "$branch_name"
+
+    # 9. Optional: Push upstream
+    echo ""
+    echo -n "☁️  Push to origin now? (y/N): "
+    read push_confirm
+    if [[ "$push_confirm" =~ ^[Yy]$ ]]; then
+        echo -e "⬆️  Pushing to origin..."
+        git push -u origin "$branch_name"
+        echo -e "✅ Branch created and pushed!"
+    else
+        echo -e "👌 Branch created locally only."
+    fi
+}
+# --- END JIRA FUNCTION ---
+
+DEFAULT_USER="antonio"
+
+# ==============================
+# PATH tweaks
+# ==============================
+
+export PATH="$PATH:$HOME/.local/bin"
