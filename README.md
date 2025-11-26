@@ -87,10 +87,7 @@ dotfiles/
 ---
 
 ## 🛠️ TODO / Future Ideas
-- Add Neovim config
-- Add Alacritty/Kitty terminal themes
 - Add tmux config
-- Make installation detect OS automatically
 
 ---
 
