@@ -1,5 +1,6 @@
 # Local overrides not to be committed
-zsh/.zshrc.local
-git/.gitconfig.local
+zsh/zshrc.local
+git/gitconfig.local
+git/gitconfig_qustodio
 *.secret
 *.env

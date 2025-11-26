@@ -1,6 +1,6 @@
 [user]
     name = Antonio Molina
-    email = antonio.molina@qustodio.com
+    email = aydevosotros@gmail.com
 
 [color]
     ui = auto
@@ -75,4 +75,8 @@
 
 [credential]
     helper = store
+
+# Qustodio specific
+[includeIf "gitdir:~/qustodio/"]
+    path = ~/.gitconfig_qustodio
 
