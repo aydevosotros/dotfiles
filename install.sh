@@ -26,7 +26,7 @@ if ! command -v fzf >/dev/null 2>&1; then
 fi
 
 echo "🔗 Linking zsh config…"
-ln -sf "$REPO_DIR/zsh/.zshrc" "$HOME/.zshrc"
+ln -sf "$REPO_DIR/zsh/zshrc" "$HOME/.zshrc"
 
 echo "🔗 Linking main git config…"
 ln -sf "$REPO_DIR/git/gitconfig" "$HOME/.gitconfig"
