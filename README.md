@@ -114,8 +114,7 @@ dotfiles/
 ├── zsh/
 │   └── zshrc
 ├── install.sh
-└── zsh/
-    └── zshrc
+└── README.md
 ```
 
 ---
