@@ -12,7 +12,7 @@
 =====================================
 ```
 
-My personal Linux/macOS configuration: **Zsh**, **Oh‑My‑Zsh**, terminal tweaks, git config, aliases…  
+My personal Linux/macOS configuration: **Zsh**, **Oh‑My‑Zsh**, terminal tweaks, git config, aliases…
 Everything clean, modular, and easy to install.
 
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
@@ -27,20 +27,26 @@ Everything clean, modular, and easy to install.
 
 ### 🐚 Zsh Setup
 - **Theme:** `agnoster` with custom right‑prompt
-- Right prompt shows:
-  - ⚡ *root indicator*
-  - 💥 *exit code on failures*
-  - 🐍 *active Python virtualenv*
-- Autosuggestions (`zsh-autosuggestions`)
-- Syntax highlighting (`zsh-syntax-highlighting`)
-- Command execution timer (⏱)
-- Clean history settings
+- Right prompt shows ⚡ (root), 💥 (exit status), and 🐍 (virtualenv)
+- Autosuggestions (`zsh-autosuggestions`) & syntax highlighting (`zsh-syntax-highlighting`)
+- Command execution timer (⏱) and tidy history defaults
+
+### ⌨️ Tmux Profile
+- Prefix remapped to `Ctrl+A`, mouse mode, 50k scrollback
+- Status bar with CPU/memory, host, date, and session/window info
+- TPM + plugins: `sensible`, `resurrect`, `continuum`, `prefix-highlight`, `yank`
+- Continuum auto-save/restore enabled out of the box
+
+### 💻 VS Code Settings
+- Workspace settings synced via symlink (`vscode/settings.json`)
+- Auto-save, trimming, JetBrains Mono with ligatures, rulers at 88/120
+- Python defaults (pytest, basic type checking) and terminal profile tweaks
 
 ### 🎮 Extras
 - `proton-run` function for launching Windows games with persistent Proton prefixes
 
 ### 🧰 Git Configuration
-Your repository includes an opinionated `.gitconfig` with:
+This repo ships an opinionated `.gitconfig` with:
 
 - **diff-so-fancy** integration
 - Rich color configuration
@@ -66,7 +72,7 @@ cd dotfiles
 ./install.sh
 ```
 
-The install script symlinks everything safely into `$HOME`.
+The installer checks for `fzf`, symlinks all configs (Zsh, Git, tmux, etc.), and links VS Code settings after backing up any local copy.
 
 ---
 
@@ -74,20 +80,17 @@ The install script symlinks everything safely into `$HOME`.
 
 ```
 dotfiles/
-├── zsh/
-│   ├── .zshrc
-│   └── custom/
 ├── git/
-│   ├── .gitconfig
-│   └── .gitignore_global
+│   └── gitconfig
+├── tmux/
+│   └── tmux.conf
+├── vscode/
+│   └── settings.json
+├── zsh/
+│   └── zshrc
 ├── install.sh
 └── README.md
 ```
-
----
-
-## 🛠️ TODO / Future Ideas
-- Add tmux config
 
 ---
 
