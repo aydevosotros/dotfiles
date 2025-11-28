@@ -38,7 +38,7 @@ Everything clean, modular, and easy to install.
 - Continuum auto-save/restore enabled out of the box
 
 ### 💻 VS Code Settings
-- Workspace settings synced via symlink (`vscode/settings.json`)
+- User settings synced via symlink (`vscode/settings.json`)
 - Auto-save, trimming, JetBrains Mono with ligatures, rulers at 88/120
 - Python defaults (pytest, basic type checking) and terminal profile tweaks
 
