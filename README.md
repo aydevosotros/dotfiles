@@ -70,18 +70,35 @@ The install script symlinks everything safely into `$HOME`.
 
 ---
 
+## 🔖 Versioning & Releases
+
+- Version number lives in the `VERSION` file and is managed by [bumpversion](https://github.com/c4urself/bump2version).
+- Install the tool once (e.g. `pip install --user bump2version`).
+- To cut a new release:
+  1. Decide the part to bump (`patch`, `minor`, or `major`).
+  2. Run `bumpversion <part>` which updates `VERSION`, commits, and tags using `.bumpversion.cfg`.
+  3. Push everything: `git push && git push --tags`.
+
+---
+
 ## 📁 Structure
 
 ```
 dotfiles/
-├── zsh/
-│   ├── .zshrc
-│   └── custom/
+├── .bumpversion.cfg
+├── .github/
+│   └── workflows/
+│       └── secret-scan.yml
+├── .gitignore
+├── .pre-commit-config.yaml
+├── README.md
+├── VERSION
 ├── git/
-│   ├── .gitconfig
-│   └── .gitignore_global
+│   ├── gitconfig
+│   └── gitconfig_qustodio (optional)
 ├── install.sh
-└── README.md
+└── zsh/
+    └── zshrc
 ```
 
 ---
