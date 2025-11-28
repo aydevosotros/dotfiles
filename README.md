@@ -36,11 +36,14 @@ Everything clean, modular, and easy to install.
 - Status bar with CPU/memory, host, date, and session/window info
 - TPM + plugins: `sensible`, `resurrect`, `continuum`, `prefix-highlight`, `yank`
 - Continuum auto-save/restore enabled out of the box
+- **Install plugins:** clone [TPM](https://github.com/tmux-plugins/tpm) once via `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`, then inside tmux press `prefix` + `I` to fetch the declared plugins.
 
 ### 💻 VS Code Settings
 - User settings synced via symlink (`vscode/settings.json`)
 - Auto-save, trimming, JetBrains Mono with ligatures, rulers at 88/120
 - Python defaults (pytest, basic type checking) and terminal profile tweaks
+- **Fonts:** best experience with [JetBrains Mono](https://www.jetbrains.com/lp/mono/) or [Fira Code](https://github.com/tonsky/FiraCode); install one of them locally or VS Code will fall back to system defaults.
+- **Extensions:** set icon theme assumes the [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme) extension is installed; install it (or change the setting) to avoid fallback warnings.
 
 ### 🎮 Extras
 - `proton-run` function for launching Windows games with persistent Proton prefixes
