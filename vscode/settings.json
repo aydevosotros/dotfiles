@@ -1,0 +1,112 @@
+{
+  // ============================
+  // ==== FILES & AUTO-SAVE =====
+  // ============================
+
+  // Automatically save files after a short delay
+  "files.autoSave": "afterDelay",
+  // Delay before auto-saving (in milliseconds)
+  "files.autoSaveDelay": 1000,
+  // Remove trailing spaces on save
+  "files.trimTrailingWhitespace": true,
+  // Ensure files always end with a newline
+  "files.insertFinalNewline": true,
+
+
+  // ============================
+  // ======== APPEARANCE ========
+  // ============================
+
+  // Default dark theme (lightweight and clean)
+  "workbench.colorTheme": "Default Dark Modern",
+  // File icons (requires "Material Icon Theme" extension)
+  "workbench.iconTheme": "material-icon-theme",
+  // No zoom applied to UI/layout
+  "window.zoomLevel": 0,
+
+
+  // ============================
+  // ========= EDITOR ===========
+  // ============================
+
+  // Use modern, thin and readable fonts for code
+  "editor.fontFamily": "JetBrains Mono, Fira Code, Menlo, Monaco, 'Courier New', monospace",
+  // Enable font ligatures (optional but nice)
+  "editor.fontLigatures": true,
+  // Comfortable size for a 3440x1440 monitor
+  "editor.fontSize": 14,
+  "editor.lineHeight": 22,
+
+  // Python: always use 4 spaces, never tabs
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+
+  // Avoid extremely long lines on ultrawide screens
+  "editor.wordWrap": "bounded",
+  // Maximum width before wrapping
+  "editor.wordWrapColumn": 120,
+  // Visual rulers for Python formatting (PEP8 & Ruff)
+  "editor.rulers": [88, 120],
+
+  // Clean editor view
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "boundary",
+  "editor.cursorBlinking": "smooth",
+  "editor.smoothScrolling": true,
+  "editor.inlineSuggest.enabled": true,
+
+
+  // ============================
+  // ========= PYTHON ===========
+  // ============================
+
+  // Lightweight type checking (not too strict)
+  "python.analysis.typeCheckingMode": "basic",
+  // Auto-complete imports
+  "python.analysis.autoImportCompletions": true,
+
+  // Prefer pytest over unittest
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": ["tests"],
+
+  // Auto-activate virtual environments in integrated terminal
+  "python.terminal.activateEnvironment": true,
+
+
+  // ============================
+  // ========= DOCKER ===========
+  // ============================
+
+  // Enable Docker explorer sidebar (if extension installed)
+  "docker.showExplorer": true,
+
+
+  // ============================
+  // ========= TERMINAL =========
+  // ============================
+
+  // Default shell for Linux
+  "terminal.integrated.defaultProfile.linux": "bash",
+  // Slightly smaller terminal font size
+  "terminal.integrated.fontSize": 14,
+
+
+  // ============================
+  // ============ GIT ===========
+  // ============================
+
+  // Auto-fetch remote changes
+  "git.autofetch": true,
+  // Do not ask for confirmation when syncing
+  "git.confirmSync": false,
+
+
+  // ============================
+  // ========= COPILOT ==========
+  // ============================
+
+  // Keep your Copilot setting
+  "github.copilot.nextEditSuggestions.enabled": true
+}
