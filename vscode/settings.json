@@ -88,7 +88,7 @@
   // ============================
 
   // Default shell for Linux
-  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.defaultProfile.linux": "zsh",
   // Slightly smaller terminal font size
   "terminal.integrated.fontSize": 14,
 
