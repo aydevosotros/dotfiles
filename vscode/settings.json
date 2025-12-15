@@ -18,9 +18,7 @@
   // ============================
 
   // Default dark theme (lightweight and clean)
-  "workbench.colorTheme": "Default Dark Modern",
-  // File icons (requires "Material Icon Theme" extension)
-  "workbench.iconTheme": "material-icon-theme",
+"workbench.colorTheme": "Default Dark Modern",
   // No zoom applied to UI/layout
   "window.zoomLevel": 0,
 
@@ -108,5 +106,7 @@
   // ============================
 
   // Keep your Copilot setting
-  "github.copilot.nextEditSuggestions.enabled": true
+"github.copilot.nextEditSuggestions.enabled": true,
+"containers.composeBuild": true,
+"aws.cloudformation.telemetry.enabled": false
 }

@@ -57,7 +57,7 @@ export TIMER_THRESHOLD=1
 export TIMER_PRECISION=3
 
 # Nerdy time format, example: "⏱ Δt=1.234s"
-export TIMER_FORMAT=' ⏱ Δt=%ds'
+export TIMER_FORMAT=' ⏱ Δt=%d'
 
 # ==============================
 # Extra plugins (outside Oh My Zsh)
@@ -238,6 +238,13 @@ test"
 # --- END JIRA FUNCTION ---
 
 DEFAULT_USER="antonio"
+
+# =============================
+# PyENV tweak
+# =============================
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # ==============================
 # PATH tweaks
