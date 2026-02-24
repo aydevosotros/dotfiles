@@ -108,5 +108,6 @@
   // Keep your Copilot setting
 "github.copilot.nextEditSuggestions.enabled": true,
 "containers.composeBuild": true,
-"aws.cloudformation.telemetry.enabled": false
+"aws.cloudformation.telemetry.enabled": false,
+"chat.viewSessions.orientation": "stacked"
 }

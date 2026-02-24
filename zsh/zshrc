@@ -210,7 +210,7 @@ test"
 
     # 6. Slugify the description (Zsh friendly logic)
     # Convert to lowercase
-    local clean_desc="${description:l}" 
+    local clean_desc="${description:l}"
     # Replace spaces with hyphens
     clean_desc="${clean_desc// /-}"
     # Remove special characters (keep a-z, 0-9, -)
@@ -239,15 +239,14 @@ test"
 
 DEFAULT_USER="antonio"
 
+# ==============================
+# PATH tweaks
+# ==============================
+export PATH="$PATH:$HOME/.local/bin"
+
 # =============================
 # PyENV tweak
 # =============================
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-
-# ==============================
-# PATH tweaks
-# ==============================
-
-export PATH="$PATH:$HOME/.local/bin"
