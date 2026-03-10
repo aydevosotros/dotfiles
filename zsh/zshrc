@@ -12,7 +12,7 @@ ZSH_THEME="agnoster"
 # Enable nicer completion behavior (optional toggles)
 # CASE_SENSITIVE="true"          # Exact-case completion
 # HYPHEN_INSENSITIVE="true"      # Treat - and _ as the same
-ENABLE_CORRECTION="true"       # Suggest corrections for mistyped commands
+# ENABLE_CORRECTION="true"       # Suggest corrections for mistyped commands
 COMPLETION_WAITING_DOTS="true"   # Show dots while waiting for completion
 
 # History settings
